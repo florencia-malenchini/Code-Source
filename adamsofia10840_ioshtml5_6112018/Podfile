@@ -1,0 +1,17 @@
+platform :ios, '9.0'
+
+target 'MakerMobile' do
+  use_frameworks!
+  pod ‘Firebase/Core’, '~> 4.1'
+  pod ‘Firebase/Messaging’, '~> 4.1'
+  pod ‘Firebase/Auth’, '~> 4.1'
+  pod ‘Firebase/Database’, '~> 4.1'
+  pod ‘Firebase/Crash’
+  pod 'GeoFire', :path => ‘ExtLibs/GeoFire’
+  pod 'CardIO'
+  pod 'Google/Analytics'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'SwiftSocket'
+  pod 'SwiftyWave', '~> 1.1.0'
+end

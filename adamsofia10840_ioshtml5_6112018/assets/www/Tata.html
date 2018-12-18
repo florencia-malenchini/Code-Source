@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tata</title>
+        <link rel="stylesheet" href="stylehtml.css">
+            <link rel="stylesheet" href="stylegreen.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no, viewport-fit=cover" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <script type="text/javascript" src="functions.js" charset="iso-8859-1"></script>
+    <script type="text/javascript" src="rules.js" charset="iso-8859-1"></script>
+    <script type="text/javascript" src="masks.js" charset="iso-8859-1"></script>
+  </head>
+    
+  <style>
+
+        
+  
+  body{
+      font-size: 10pt;
+      font-family: Arial;
+      margin: 0;
+      padding: 0;
+            background-color: #F0F0F0;
+              }
+
+  #BackButton {
+    width: 21%;
+    height: 27px;
+    font-family: Arial;
+    font-size: 8pt; 	
+    font-weight:bold;
+    text-align:center;
+    position: absolute;
+    top:11px;
+    left: 3%;
+    z-index: 9999;
+  }
+
+  #Tata{
+    position: relative;
+    margin:0;
+    padding:0;
+    width: 100%;
+    height: 316px;
+  }
+
+  .labelcomponents{
+      position: absolute;
+      font-family:arial,sans-serif;
+  }
+
+  .indicator{
+    background-image: url("res/image/indicator.png");
+    width:16px;
+    height:16px;
+    background-repeat:no-repeat;
+  }
+
+  </style>
+  <body onload="formOnload()" onselectstart="return false;">
+    <script>
+
+    function GetSystemProperties() {
+      return top.getSession("metadata");  
+    }
+
+    var formGUID = '{907D953E-6493-4FAF-A25A-7FC93BF58E4F}';
+    var grids = [];
+    var lookups = [];
+
+    if(top.platform=='ioshtml5'){
+      parent.formGUID = formGUID;
+    }
+
+    function refresh() {
+      //Lookups
+      for (var i=0;i<lookups.length;i++) {
+        lookups[i].refresh();
+      }
+      for (var i=0;i<grids.length;i++) {
+          grids[i].refresh();
+        }
+    }
+
+    function formUnload() {
+        try {  
+          
+        } catch(e) {
+          notifyError(e);
+        }
+    }
+
+    var minHeight = 316;
+    var minWidth = 576;
+
+    function resize() {
+    
+     var width = top.innerWidth;
+     var height = top.innerHeight;
+
+     try{ 
+         $('CRUDSearch').style.width = (top.innerWidth - 70) + 'px';
+     }catch(e){}
+
+
+            var incValue = 0;
+        if (height > minHeight) {
+
+           $('Tata').style.height = height+'px';    
+         
+           incValue = (height - minHeight) / minHeight;
+        } else {
+                   // top.body.style.height = height+'px'; 
+           $('Tata').style.height = minHeight+'px'; 
+           incValue = 0;
+        }
+        document.body.style.fontSize = parseInt(10 + (10 * incValue))+'pt';
+        
+            resizeInternal();
+        }
+
+    function doResize() {
+          setTimeout(resize,0);
+        //setTimeout(doResize,1000);
+    }
+
+    var supportsOrientationChange = "onorientationchange" in window;
+    var orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+
+    window.addEventListener(orientationEvent, function() {
+        doResize();
+    }, false);
+
+    function getVersionAndroid(){
+      if(navigator.userAgent.indexOf("Android 3") > 0)
+         return "3";
+      else if (navigator.userAgent.indexOf("Android 4") > 0)
+         return "4";
+      else if (navigator.userAgent.indexOf("Android 2") > 0)
+         return "2";	
+    }
+
+    function formOnload() {
+     
+         if(getVersionAndroid() == '4' && $('CRUDSearch') == null){
+                                                             }
+         try{ 
+                $('CRUDSearch').style.width = (top.innerWidth - 70) + 'px';
+         }catch(e){}
+          if (top.platform != 'ioshtml5'){
+                // addtouchMove();       
+          }
+         resize();
+         //Exibe a primeira Aba    	 
+        try {
+          OnEnterForm()
+          
+        } catch(e) {
+          notifyError(e);
+        }
+        setTimeout(function() {
+          for (var i=0;i<grids.length;i++) {
+            grids[i].refresh();
+          }
+        },200);
+        if (!top.canBack()) {
+        var i = 1;
+        var sulfix = '';
+        while (true) {
+          if ($('CRUDBack'+sulfix)) {
+            $('CRUDBack'+sulfix).style.display = 'none';
+          i++;
+          if (i < 10) {
+            sulfix = '0'+i;
+          } else {
+            sulfix = i;
+          }
+        } else {
+          break;
+        }
+        }
+        }  
+        resizeInternal();
+    }
+
+    function updateLookups(skipComponent) {
+      for (var i=0;i<lookups.length;i++) {
+        if(skipComponent != lookups[i].id)
+          lookups[i].refresh();
+        }
+    }
+
+    var components = [];
+        components.push('TMAKERBUTTON');
+        components.push('TMAKERMEMO');
+    
+
+    function ebfFormNextPage(a) {
+       b =  (a==1) ?  window.innerWidth + "px" : '-' + window.innerWidth + "px"; ; 
+       var div = document.getElementById("Tata");
+       div.style.left = b ;
+       // P = VELOCIDADE DE PROGRESSAO
+       var p = 10;
+       var f = window.innerWidth/p;
+       for (x=1;x!=f+1;x++) {
+        // T = TEMPO DE PROGRESSAO
+         var t = x*2;
+         setTimeout(function(){
+            
+             left = (a==1) ? (parseInt(div.style.left)-p)  : (parseInt(div.style.left)+p);
+           div.style.left = left + "px";
+           
+         },t);	 
+         
+       }
+    }
+
+    </script>
+    <div id="Tata" class="maincontainer">
+    <div style="height:100%;width:100%;z-index:1" id="layout"></div>
+      <script>resize();</script>
+          <center style="display: none">
+          <ul id="tabs">
+    <li name="Cadastro01" class="selected" onClick="ebfFormOpenTab('Cadastro')" >Cadastro</li>      </ul>
+    </center>
+
+        <div id="Cadastro01"  style="display: block"   >
+    
+
+
+ 
+
+   
+
+<!-- TMAKERBUTTON -->
+<style>
+#TMAKERBUTTON,.TMAKERBUTTON{
+
+    width: 27.95138888888889%;
+    height: 20.253164556962027%;
+        font-size: 80%; 	
+    
+    top:10.443037974683545%;
+    left:20.833333333333336%;
+     z-index:999999;
+    
+    text-align:center;
+    position: absolute;
+
+
+   
+ }
+</style>
+<button type="button"  class="button " id="TMAKERBUTTON"   recordMask="false"  onclick="clickAction(this, function() { Selecaoicones() })" ontouchstart="this.className = 'button_active'" ontouchend="this.className = 'button'"> hheh</button>
+<!-- /TMAKERBUTTON -->
+
+
+ 
+
+ 
+
+<!-- TMAKERMEMO -->
+<style>
+#TMAKERMEMO,.TMAKERMEMO{
+    width: 66.31944444444444%;
+    height: 48.41772151898734%;
+    /*background: #FBFFFF;*/	
+    font-size: 80%; 	
+    /*color:#000000;*/
+    /*border: 1px solid #d7d7d7;*/
+    z-index: 1;
+    position: absolute;
+    top:45.56962025316456%;
+    left:18.57638888888889%;
+    
+}
+
+#labelTMAKERMEMO,.labelTMAKERMEMO{
+    top: 44.06962025316456%;
+    left:18.57638888888889%;
+    z-index: 1;
+    line-height: 0px;
+    font-size: 100%;
+}
+</style>
+
+<label id="labelTMAKERMEMO" for="TMAKERMEMO" class="label labelcomponents"   recordMask="false" ></label>
+<textarea id="TMAKERMEMO" class="memo"   recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'TMAKERMEMO','memo')" ></textarea>
+<!-- /TMAKERMEMO -->
+    </div>
+        </div>
+  </body>
+</html>

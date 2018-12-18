@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sofia</title>
+    <link rel="stylesheet" href="stylehtml.css">
+    <link rel="stylesheet" href="stylegreen.css">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="menustylegreen.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <script type="text/javascript" src="functions.js"></script>
+    <script type="text/javascript" src="rules.js"></script>
+  </head>
+<body onload="formOnload()">
+<!--menustylegreen -->
+<script>
+
+function GetSystemProperties() {
+  return top.getSession("metadata");  
+}
+
+var formGUID = '{00000000-0000-0000-0000-000000000000}';
+var grids = [];
+
+var supportsOrientationChange = "onorientationchange" in window;
+var orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+
+window.addEventListener(orientationEvent, function() {
+    doResize();
+}, false);
+
+function formOnload() {
+  try {
+    for (var i=0;i<grids.length;i++) {
+      grids[i].refresh();
+    }
+  } catch(e) {
+    alert(e);
+  }
+}
+
+var components = [];
+components.push('MenuGrid');
+
+var menuMap = new MakerMap();
+var currentMenu = [];
+
+function doResize(e) {
+}
+
+function addMenu(parentId, id, description, formId) {
+	if (!parentId) {
+		parentId = 'ROOT';
+	}
+
+	var menuList = menuMap.get(parentId);
+	
+	if (!menuList) {
+		menuList = [];
+		menuMap.add(parentId, {list: menuList});
+	} else {
+		menuList = menuList.list;
+	}
+
+  menuMap.add(id+'_parent', parentId);
+	
+	var elem = {}; 
+	elem.parentId = parentId;
+	elem.row = [description];
+	elem.keys = [];
+	if (formId) {
+	  elem.icon = 'empty.gif';
+	}
+	elem.onclick = function() {
+		if (formId) {
+			ebfFormOpenForm(formId);
+		} else {
+			setTimeout(showMenu(id),10);
+		}
+	}
+		
+	menuList.push(elem)
+}
+
+function showMenu(id, parentId) {
+  var menu = menuMap.get(id);
+  if (menu) {
+	fillGrid('MenuGrid', menu.list);
+	if (id == 'ROOT') {
+	 $('BackButton').onclick = function(){};
+	  $('BackButton').style.display = 'none';
+	//  $('MenuTitle').style.left = '0%';
+	// $('MenuTitle').style.width = '100%';
+	} else {
+	  $('BackButton').onclick = function() {
+	  	showMenu(menuMap.get(id+'_parent'));
+	  }
+	  $('BackButton').style.display = 'block';
+	//  x = $('BackButton').offsetWidth + $('BackButton').offsetLeft;
+	//  y = x = 0 ? 1 : x ;
+	//  pos = (y*100)/document.body.offsetWidth; 
+	//  $('MenuTitle').style.left = pos + '%';
+	//  $('MenuTitle').style.width = '75%';
+	}
+  }
+  resizeInternal();
+}
+
+
+
+
+var minHeight = window.innerWidth;
+var minWidth =  window.innerHeight;
+
+
+function resize() {
+
+    var width = parent.innerWidth;
+    var height = parent.innerHeight;
+         $('MenuForm').style.height = minHeight+'px'; 
+    resizeInternal();
+}
+function doResize() {
+	  setTimeout(resize,500);
+	//setTimeout(doResize,1000);
+}
+
+window.addEventListener("orientationchange", function() {  doResize(); }, false);
+window.addEventListener("resize", function() {  doResize(); }, false);
+
+</script>
+
+<div id="MenuForm">
+
+<button type="button" id="BackButton" >Voltar</button>
+
+<header class="bevel" id="MenuHeader"></header>
+ 
+<label class="label" id="MenuTitle" name="MenuTitle">Sofia</label>
+
+
+<ul class="Menu" id="MenuGrid" role="list"></ul>
+<script>
+  $('MenuGrid').refresh = function() { 
+	  showMenu('ROOT');
+  }
+  grids.push($('MenuGrid'));
+</script>
+ 
+
+</div>
+<a href="#" style="visibility:hidden;">.</a>
+</body>
+</html>

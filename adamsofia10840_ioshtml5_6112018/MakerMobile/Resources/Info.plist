@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  
+<key>NSCalendarsUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso ao calendário </string>
+<key>NSRemindersUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso ao lembrete </string>
+<key>NSContactsUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso aos seus contatos </string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso a sua biblioteca de fotos </string>
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso ao Bluetooth </string>
+<key>NSMicrophoneUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso ao microphone </string>
+<key>NSCameraUsageDescription</key>
+<string>Permite que você tire fotos pelo app (por exemplo, sua foto de perfil) </string>
+<key>NSLocationAlwaysUsageDescription</key>
+<string>Você precisa autorizar o acesso para que o aplicativo funcione corretamente.  Sofia coleta seus dados de localização de tempos em tempos através de solicitações durante as interações com o usuário. Fazemos isso para melhorar a coleta, o serviço ao cliente e aumentar a segurança</string>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>Você precisa autorizar o acesso para que o aplicativo funcione corretamente.  Sofia coleta seus dados de localização de tempos em tempos através de solicitações durante as interações com o usuário. Fazemos isso para melhorar a coleta, o serviço ao cliente e aumentar a segurança</string>
+<key>NSLocationUsageDescription</key>
+<string>Você precisa autorizar o acesso para que o aplicativo funcione corretamente.  Sofia coleta seus dados de localização de tempos em tempos através de solicitações durante as interações com o usuário. Fazemos isso para melhorar a coleta, o serviço ao cliente e aumentar a segurança</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Você precisa autorizar o acesso para que o aplicativo funcione corretamente.  Sofia coleta seus dados de localização de tempos em tempos através de solicitações durante as interações com o usuário. Fazemos isso para melhorar a coleta, o serviço ao cliente e aumentar a segurança</string>
+<key>NSHealthShareUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso ao Health </string>
+<key>NSHealthUpdateUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso ao Health </string>
+<key>NSHomeKitUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso ao HomeKit </string>
+<key>kTCCServiceMediaLibrary</key>
+<string>${PRODUCT_NAME} deseja ter acesso a biblioteca de arquivos </string>
+<key>NSMotionUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso ao Motion </string>
+<key>NSSpeechRecognitionUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso ao reconhecimento de voz </string>
+<key>NSSiriUsageDescription</key>
+<string>${PRODUCT_NAME} deseja ter acesso a Siri </string>
+  <key>CFBundleDevelopmentRegion</key>
+  <string>Brazil</string>
+  <key>CFBundleDisplayName</key>
+  <string>Sofia</string>
+  <key>CFBundleExecutable</key>
+  <string>${EXECUTABLE_NAME}</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>${PRODUCT_NAME} deseja ter acesso a sua biblioteca de fotos</string>
+  <key>UIRequiresFullScreen</key>
+  <true/>
+  <key>CFBundleIdentifier</key>
+  <string>com.WCH</string>
+  <key>CFBundleInfoDictionaryVersion</key>
+  <string>6.0</string>
+  <key>CFBundleName</key>
+  <string>Sofia</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>CFBundleShortVersionString</key>
+  <string>1.0.840</string>
+  <key>CFBundleSignature</key>
+  <string>????</string>
+<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+            <key>CFBundleURLName</key>
+            <string>com.makermobile</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.WCH</string>
+            </array>
+        </dict>
+	</array>
+  <key>CFBundleVersion</key>
+  <string>1.0.840</string>
+  <key>LSRequiresIPhoneOS</key>
+  <true/>
+  <key>NSAppTransportSecurity</key>
+  <dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+  </dict>
+  <key>UIStatusBarHidden</key>
+  <true/>
+  <key>UIStatusBarHidden~ipad</key>
+  <true/>
+  <key>UIApplicationExitsOnSuspend</key>
+  <false/>
+  <key>UISupportedInterfaceOrientations</key>
+  <array>
+    <string>UIInterfaceOrientationPortrait</string>
+    <string>UIInterfaceOrientationPortraitUpsideDown</string>
+  </array>
+  <key>UISupportedInterfaceOrientations~ipad</key>
+  <array>
+    <string>UIInterfaceOrientationPortrait</string>
+    <string>UIInterfaceOrientationPortraitUpsideDown</string>
+    </array>
+<key>CFBundleURLTypes</key>
+    <array>
+    </array>
+  <key>ManterTelaAtiva</key>
+  <false/>
+  <key>UIBackgroundModes</key>
+  <array>
+              </array>
+  
+  <key>StatusBarColor</key>
+    <string></string>
+    <key>UIMainStoryboardFile</key>
+  <string>Main</string>
+</dict>
+</plist>

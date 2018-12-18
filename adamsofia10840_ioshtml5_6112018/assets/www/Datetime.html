@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Datetime</title>
+    <link rel="stylesheet" href="stylehtml.css">
+    <link rel="stylesheet" href="stylegray.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <script type="text/javascript" src="functions.js" charset="iso-8859-1"></script>
+    <script type="text/javascript" src="rules.js" charset="iso-8859-1"></script>
+    <script type="text/javascript" src="masks.js" charset="iso-8859-1"></script>
+  </head>
+<style>
+body{
+    font-size: 10pt;
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+}
+
+#BackButton {
+    width: 21%;
+    height: 27px;
+    font-family: Arial;
+    font-size: 8pt; 	
+    font-weight:bold;
+    text-align:center;
+    position: absolute;
+    top:11px;
+    left: 3%;
+    z-index: 9999;
+}
+
+#Datetime{
+    position: relative;
+    margin:0;
+    padding:0;
+    width: 100%;
+    height: 377px;
+}
+
+.labelcomponents{
+    position: absolute;
+    font-family:arial,sans-serif;
+}
+
+.bevel{
+
+}
+
+.indicator{
+
+    background-image: url("res/image/indicator.png");
+    width:16px;
+    height:16px;
+    background-repeat:no-repeat;
+}
+</style>
+<body onload="formOnload()" onselectstart="return false;">
+<script>
+
+function GetSystemProperties() {
+  return top.getSession("metadata");  
+}
+
+var formGUID = '{1609DF3A-979D-4061-8878-CC6393962FED}';
+var grids = [];
+var lookups = [];
+
+function refresh() {
+  //Lookups
+  for (var i=0;i<lookups.length;i++) {
+   	lookups[i].refresh();
+  }
+  for (var i=0;i<grids.length;i++) {
+	  	grids[i].refresh();
+	  }
+}
+
+function formUnload() {
+    try {  
+      
+    } catch(e) {
+      notifyError(e);
+    }
+}
+
+var minHeight = 377;
+var minWidth = 320;
+
+function resize() {
+  setTimeout(function() {
+
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+ 
+    var incValue = 0;
+    if (height > minHeight) {
+
+       $('Datetime').style.height = height+'px';    
+	             $('Datetime').style.width = width+'px';
+       
+       incValue = (height - minHeight) / minHeight;
+    } else {
+	             $('Datetime').style.width = width+'px';
+             // top.body.style.height = height+'px'; 
+       $('Datetime').style.height = minHeight+'px'; 
+       incValue = 0;
+    }
+    document.body.style.fontSize = parseInt(10 + (10 * incValue))+'pt';
+    
+    resizeInternal();
+  },100);
+}
+
+function doResize() {
+  setTimeout(resize,500);
+//setTimeout(doResize,1000);
+}
+
+var supportsOrientationChange = "onorientationchange" in window;
+var orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+
+window.addEventListener(orientationEvent, function() {
+    doResize();
+}, false);
+
+function getVersionAndroid(){
+	if(navigator.userAgent.indexOf("Android 3") > 0)
+	   return "3";
+	else if (navigator.userAgent.indexOf("Android 4") > 0)
+	   return "4";
+	else if (navigator.userAgent.indexOf("Android 2") > 0)
+	   return "2";	
+}
+
+function formOnload() {
+ 
+     if(getVersionAndroid() == '4' && $('CRUDSearch') == null){
+               	   CRUDHeader2.style.position = 'fixed !important';  
+                                     	   CRUDBack.style.position = 'fixed !important';  
+                                                                 	   CRUDok.style.position = 'fixed !important';  
+                                                                         }
+     try{ 
+            $('CRUDSearch').style.width = (top.innerWidth - 70) + 'px';
+     }catch(e){}
+      if (top.platform != 'ioshtml5'){
+             addtouchMove();       
+      }
+     resize();
+     //Exibe a primeira Aba    	 
+    try {
+      SetDefaultDateTimeValues()
+      
+    } catch(e) {
+      notifyError(e);
+    }
+    setTimeout(function() {
+      for (var i=0;i<grids.length;i++) {
+        grids[i].refresh();
+      }
+    },200);
+    if (!top.canBack()) {
+	  var i = 1;
+	  var sulfix = '';
+	  while (true) {
+	    if ($('CRUDBack'+sulfix)) {
+     	  $('CRUDBack'+sulfix).style.display = 'none';
+		  i++;
+		  if (i < 10) {
+		    sulfix = '0'+i;
+		  } else {
+		    sulfix = i;
+		  }
+		} else {
+		  break;
+		}
+	  }
+    }  
+    resizeInternal();
+}
+
+function updateLookups(skipComponent) {
+	for (var i=0;i<lookups.length;i++) {
+	  if(skipComponent != lookups[i].id)
+    	lookups[i].refresh();
+    }
+}
+
+var components = [];
+components.push('CRUDHeader2');
+components.push('MakerLabel2');
+components.push('CRUDBack');
+components.push('MakerComboBox8');
+components.push('MakerComboBox2');
+components.push('MakerEdit2');
+components.push('CRUDok');
+components.push('MakerButton1');
+components.push('MakerComboBox4');
+components.push('MakerComboBox5');
+components.push('MakerComboBox6');
+
+
+function ebfFormNextPage(a) {
+	 b =  (a==1) ?  window.innerWidth + "px" : '-' + window.innerWidth + "px"; ; 
+	 var div = document.getElementById("Datetime");
+	 div.style.left = b ;
+	 // P = VELOCIDADE DE PROGRESSAO
+	 var p = 10;
+	 var f = window.innerWidth/p;
+	 for (x=1;x!=f+1;x++) {
+		// T = TEMPO DE PROGRESSAO
+		 var t = x*2;
+		 setTimeout(function(){
+		    
+		     left = (a==1) ? (parseInt(div.style.left)-p)  : (parseInt(div.style.left)+p);
+			 div.style.left = left + "px";
+			 
+		 },t);	 
+		 
+	 }
+}
+
+</script>
+
+<div id="Datetime" class="maincontainer">
+<div style="height:100%;width:100%;z-index:1" id="layout"></div>
+  <script>resize();</script>
+  <center style="display: none">
+  <ul id="tabs">
+<li name="Cadastro01" class="selected" onClick="ebfFormOpenTab('Cadastro')" >Cadastro</li>  </ul>
+</center>
+
+<div id="Cadastro01"  style="display: block"   >
+
+
+
+ 
+
+  
+
+<!-- CRUDHeader2 -->
+<style>
+#CRUDHeader2,.CRUDHeader2{  
+
+    height: 46px;
+    left: 0%;
+    top: 0px;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+}
+</style>
+<header class="bevel" id="CRUDHeader2"></header>
+<!-- /CRUDHeader2 -->
+
+
+ 
+
+  
+
+<!-- MakerLabel2 -->
+<style>
+#MakerLabel2,.MakerLabel2{ 
+     width: 100.0%;
+     height: 5.570291777188329%;
+     font-size: 100%;  
+     top:2.9177718832891246%;
+     left:0.0%;
+     z-index: 7;
+    
+    color:#FFFFFF;
+    text-align:center;
+    font-weight:bold;
+
+    position: absolute;
+    line-height: normal;
+    white-space: nowrap;
+}
+</style>
+<label type="text"  class="label" id="MakerLabel2" name="MakerLabel2"   recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'MakerComboBox8','text')">Selecione a data</label>
+<!-- /MakerLabel2 -->
+
+
+ 
+
+   
+
+<!-- CRUDBack -->
+<style>
+#CRUDBack,.CRUDBack{
+    
+        height: 27px;
+	font-size: 8pt;
+	
+		width: 18%;
+        left:3%;
+	top:11px;
+	    font-family: Arial;
+    z-index: 999999;
+    font-weight:bold;
+
+    text-align:center;
+    position: absolute;
+ }
+</style>
+<button type="button"  class="button " id="CRUDBack"   recordMask="false"  onclick="clickAction(this, function() { CloseCurrentForm() })" ontouchstart="this.className = 'button_active'" ontouchend="this.className = 'button'"> Cancelar </button>
+<!-- /CRUDBack -->
+
+
+ 
+
+  
+
+<!-- MakerComboBox8 -->
+<style>
+#MakerComboBox8,.MakerComboBox8{
+    width: 22.8125%;
+    height: 8.488063660477453%;
+/*    background: #FBFFFF;	 */
+    font-size: 80%; 	
+    color:#000000;
+    
+/*    border: 1px solid #c0c0c0; */
+    top: 23.342175066312997%;
+    left:3.125%;
+    z-index: 4;
+    position: absolute;
+    vertical-align:center;
+}
+#labelMakerComboBox8,.labelMakerComboBox8{
+    top: 21.842175066312997%;
+    height: 8.488063660477453%;
+    left:3.125%;
+    z-index: 4;
+    line-height: 0px;
+    font-size: 100%;
+}
+</style>
+<label id="labelMakerComboBox8" for="MakerComboBox8" class="label labelcomponents"   recordMask="false" ><b> Dia <font color="red">*</font></b></label>
+<select class="combobox" size="1" name="MakerComboBox8" id="MakerComboBox8"   recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'MakerComboBox2','text')">
+  <option value=""></option>
+  <option value="01">01</option>
+  <option value="02">02</option>
+  <option value="03">03</option>
+  <option value="04">04</option>
+  <option value="05">05</option>
+  <option value="06">06</option>
+  <option value="07">07</option>
+  <option value="08">08</option>
+  <option value="09">09</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
+  <option value="21">21</option>
+  <option value="22">22</option>
+  <option value="23">23</option>
+  <option value="24">24</option>
+  <option value="25">25</option>
+  <option value="26">26</option>
+  <option value="27">27</option>
+  <option value="28">28</option>
+  <option value="29">29</option>
+  <option value="30">30</option>
+  <option value="31">31</option>
+</select>
+<!-- /MakerComboBox8 -->
+
+
+ 
+
+  
+
+<!-- MakerComboBox2 -->
+<style>
+#MakerComboBox2,.MakerComboBox2{
+    width: 42.8125%;
+    height: 8.488063660477453%;
+/*    background: #FBFFFF;	 */
+    font-size: 80%; 	
+    color:#000000;
+    
+/*    border: 1px solid #c0c0c0; */
+    top: 23.342175066312997%;
+    left:27.8125%;
+    z-index: 1;
+    position: absolute;
+    vertical-align:center;
+}
+#labelMakerComboBox2,.labelMakerComboBox2{
+    top: 21.842175066312997%;
+    height: 8.488063660477453%;
+    left:27.8125%;
+    z-index: 1;
+    line-height: 0px;
+    font-size: 100%;
+}
+</style>
+<label id="labelMakerComboBox2" for="MakerComboBox2" class="label labelcomponents"   recordMask="false" ><b> Mês <font color="red">*</font></b></label>
+<select class="combobox" size="1" name="MakerComboBox2" id="MakerComboBox2"   recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'MakerEdit2','text')">
+  <option value=""></option>
+  <option value="01">Janeiro</option>
+  <option value="02">Fevereiro</option>
+  <option value="03">Março</option>
+  <option value="04">Abril</option>
+  <option value="05">Maio</option>
+  <option value="06">Junho</option>
+  <option value="07">Julho</option>
+  <option value="08">Agosto</option>
+  <option value="09">Setembro</option>
+  <option value="10">Outubro</option>
+  <option value="11">Novembro</option>
+  <option value="12">Dezembro</option>
+</select>
+<!-- /MakerComboBox2 -->
+
+
+  
+
+  
+
+<!-- MakerEdit2 -->
+<style>
+#MakerEdit2,.MakerEdit2{
+    width: 22.8125%;
+    height: 8.222811671087534%;
+    font-size: 80%; 	
+    color:#000000;
+    background-color:#FBFFFF;
+    
+    z-index: 5;
+    position: absolute;
+    top:23.342175066312997%;
+    left:73.125%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #c0c0c0;
+}
+
+#labelMakerEdit2,.labelMakerEdit2{
+    top: 22.342175066312997%;
+    left:73.125%;
+    z-index: 5;
+    line-height: 0px;
+    font-size: 100%;
+}
+
+#imgMakerEdit2{
+    z-index: 5;
+    top:23.342175066312997%;
+    position: absolute;
+    left: 98.9375%;
+    height: 19px;
+    width: 19px;
+}
+</style>
+
+   <label id="labelMakerEdit2"  for="MakerEdit2" class="label labelcomponents"><b> Ano <font color="red">*</font></b></label>
+
+
+<input type="text" id="MakerEdit2"    maxlength="4"webmask="" recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'MakerComboBox4','text')"  />
+
+
+<script>
+   ebfComponentSetMask('',$c('MakerEdit2'),'','')
+    $c('MakerEdit2').type = "tel"
+</script>
+<!-- /MakerEdit2 -->
+
+
+ 
+
+   
+
+<!-- CRUDok -->
+<style>
+#CRUDok,.CRUDok{
+    
+        height: 27px;
+	font-size: 8pt;
+	
+		top:11px;
+	width: 14.958448753462603%; 
+	left: 82.54847645429363%;
+	    font-family: Arial;
+    z-index: 999999;
+    font-weight:bold;
+
+    text-align:center;
+    position: absolute;
+ }
+</style>
+<button type="button"  class="button " id="CRUDok"   recordMask="false"  onclick="clickAction(this, function() { ChangeComponentValueWithSelectedDateTime() })" ontouchstart="this.className = 'button_active'" ontouchend="this.className = 'button'"> OK</button>
+<!-- /CRUDok -->
+
+
+ 
+
+   
+
+<!-- MakerButton1 -->
+<style>
+#MakerButton1,.MakerButton1{
+	width: 42.8125%;
+    height: 5.305039787798409%;
+        font-size: 80%; 	
+    
+    top:59.94694960212201%;
+    left:27.500000000000004%;
+	
+    z-index: 999999;
+    
+    text-align:center;
+    position: absolute;
+ }
+</style>
+<button type="button"  class="button " id="MakerButton1"   recordMask="false"  onclick="clickAction(this, function() { CleanComponentValueDate() })" ontouchstart="this.className = 'button_active'" ontouchend="this.className = 'button'"> Limpar</button>
+<!-- /MakerButton1 -->
+
+
+ 
+
+  
+
+<!-- MakerComboBox4 -->
+<style>
+#MakerComboBox4,.MakerComboBox4{
+    width: 25.3125%;
+    height: 7.957559681697612%;
+/*    background: #FBFFFF;	 */
+    font-size: 80%; 	
+    color:#000000;
+    
+/*    border: 1px solid #c0c0c0; */
+    top: 44.297082228116714%;
+    left:9.6875%;
+    z-index: 2;
+    position: absolute;
+    vertical-align:center;
+}
+#labelMakerComboBox4,.labelMakerComboBox4{
+    top: 42.797082228116714%;
+    height: 7.957559681697612%;
+    left:9.6875%;
+    z-index: 2;
+    line-height: 0px;
+    font-size: 100%;
+}
+</style>
+<label id="labelMakerComboBox4" for="MakerComboBox4" class="label labelcomponents"   recordMask="false" ><b> Hora <font color="red">*</font></b></label>
+<select class="combobox" size="1" name="MakerComboBox4" id="MakerComboBox4"   recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'MakerComboBox5','text')">
+  <option value=""></option>
+  <option value="00">00</option>
+  <option value="01">01</option>
+  <option value="02">02</option>
+  <option value="03">03</option>
+  <option value="04">04</option>
+  <option value="05">05</option>
+  <option value="06">06</option>
+  <option value="07">07</option>
+  <option value="08">08</option>
+  <option value="09">09</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
+  <option value="21">21</option>
+  <option value="22">22</option>
+  <option value="23">23</option>
+</select>
+<!-- /MakerComboBox4 -->
+
+
+ 
+
+  
+
+<!-- MakerComboBox5 -->
+<style>
+#MakerComboBox5,.MakerComboBox5{
+    width: 25.3125%;
+    height: 7.957559681697612%;
+/*    background: #FBFFFF;	 */
+    font-size: 80%; 	
+    color:#000000;
+    
+/*    border: 1px solid #c0c0c0; */
+    top: 44.297082228116714%;
+    left:38.4375%;
+    z-index: 3;
+    position: absolute;
+    vertical-align:center;
+}
+#labelMakerComboBox5,.labelMakerComboBox5{
+    top: 42.797082228116714%;
+    height: 7.957559681697612%;
+    left:38.4375%;
+    z-index: 3;
+    line-height: 0px;
+    font-size: 100%;
+}
+</style>
+<label id="labelMakerComboBox5" for="MakerComboBox5" class="label labelcomponents"   recordMask="false" ><b> Minuto <font color="red">*</font></b></label>
+<select class="combobox" size="1" name="MakerComboBox5" id="MakerComboBox5"   recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'MakerComboBox6','text')">
+  <option value=""></option>
+  <option value="00">00</option>
+  <option value="01">01</option>
+  <option value="02">02</option>
+  <option value="03">03</option>
+  <option value="04">04</option>
+  <option value="05">05</option>
+  <option value="06">06</option>
+  <option value="07">07</option>
+  <option value="08">08</option>
+  <option value="09">09</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
+  <option value="21">21</option>
+  <option value="22">22</option>
+  <option value="23">23</option>
+  <option value="24">24</option>
+  <option value="25">25</option>
+  <option value="26">26</option>
+  <option value="27">27</option>
+  <option value="28">28</option>
+  <option value="29">29</option>
+  <option value="30">30</option>
+  <option value="31">31</option>
+  <option value="32">32</option>
+  <option value="33">33</option>
+  <option value="34">34</option>
+  <option value="35">35</option>
+  <option value="36">36</option>
+  <option value="37">37</option>
+  <option value="38">38</option>
+  <option value="39">39</option>
+  <option value="40">40</option>
+  <option value="41">41</option>
+  <option value="42">42</option>
+  <option value="43">43</option>
+  <option value="44">44</option>
+  <option value="45">45</option>
+  <option value="46">46</option>
+  <option value="47">47</option>
+  <option value="48">48</option>
+  <option value="49">49</option>
+  <option value="50">50</option>
+  <option value="51">51</option>
+  <option value="52">52</option>
+  <option value="53">53</option>
+  <option value="54">54</option>
+  <option value="55">55</option>
+  <option value="56">56</option>
+  <option value="57">57</option>
+  <option value="58">58</option>
+  <option value="59">59</option>
+</select>
+<!-- /MakerComboBox5 -->
+
+
+ 
+
+  
+
+<!-- MakerComboBox6 -->
+<style>
+#MakerComboBox6,.MakerComboBox6{
+    width: 25.3125%;
+    height: 7.957559681697612%;
+/*    background: #FBFFFF;	 */
+    font-size: 80%; 	
+    color:#000000;
+    
+/*    border: 1px solid #c0c0c0; */
+    top: 44.297082228116714%;
+    left:67.1875%;
+    z-index: 6;
+    position: absolute;
+    vertical-align:center;
+}
+#labelMakerComboBox6,.labelMakerComboBox6{
+    top: 42.797082228116714%;
+    height: 7.957559681697612%;
+    left:67.1875%;
+    z-index: 6;
+    line-height: 0px;
+    font-size: 100%;
+}
+</style>
+<label id="labelMakerComboBox6" for="MakerComboBox6" class="label labelcomponents"   recordMask="false" ><b> Segundo <font color="red">*</font></b></label>
+<select class="combobox" size="1" name="MakerComboBox6" id="MakerComboBox6"   recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'MakerComboBox8','text')">
+  <option value=""></option>
+  <option value="00">00</option>
+  <option value="01">01</option>
+  <option value="02">02</option>
+  <option value="03">03</option>
+  <option value="04">04</option>
+  <option value="05">05</option>
+  <option value="06">06</option>
+  <option value="07">07</option>
+  <option value="08">08</option>
+  <option value="09">09</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
+  <option value="21">21</option>
+  <option value="22">22</option>
+  <option value="23">23</option>
+  <option value="24">24</option>
+  <option value="25">25</option>
+  <option value="26">26</option>
+  <option value="27">27</option>
+  <option value="28">28</option>
+  <option value="29">29</option>
+  <option value="30">30</option>
+  <option value="31">31</option>
+  <option value="32">32</option>
+  <option value="33">33</option>
+  <option value="34">34</option>
+  <option value="35">35</option>
+  <option value="36">36</option>
+  <option value="37">37</option>
+  <option value="38">38</option>
+  <option value="39">39</option>
+  <option value="40">40</option>
+  <option value="41">41</option>
+  <option value="42">42</option>
+  <option value="43">43</option>
+  <option value="44">44</option>
+  <option value="45">45</option>
+  <option value="46">46</option>
+  <option value="47">47</option>
+  <option value="48">48</option>
+  <option value="49">49</option>
+  <option value="50">50</option>
+  <option value="51">51</option>
+  <option value="52">52</option>
+  <option value="53">53</option>
+  <option value="54">54</option>
+  <option value="55">55</option>
+  <option value="56">56</option>
+  <option value="57">57</option>
+  <option value="58">58</option>
+  <option value="59">59</option>
+</select>
+<!-- /MakerComboBox6 -->
+</div>
+</div>
+</body>
+</html>

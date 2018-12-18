@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TabelaMensagem</title>
+        <link rel="stylesheet" href="stylehtml.css">
+            <link rel="stylesheet" href="stylegreen.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no, viewport-fit=cover" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <script type="text/javascript" src="functions.js" charset="iso-8859-1"></script>
+    <script type="text/javascript" src="rules.js" charset="iso-8859-1"></script>
+    <script type="text/javascript" src="masks.js" charset="iso-8859-1"></script>
+  </head>
+    
+  <style>
+
+        
+  
+  body{
+      font-size: 10pt;
+      font-family: Arial;
+      margin: 0;
+      padding: 0;
+            background-color: #F0F0F0;
+              }
+
+  #BackButton {
+    width: 21%;
+    height: 27px;
+    font-family: Arial;
+    font-size: 8pt; 	
+    font-weight:bold;
+    text-align:center;
+    position: absolute;
+    top:11px;
+    left: 3%;
+    z-index: 9999;
+  }
+
+  #TabelaMensagem{
+    position: relative;
+    margin:0;
+    padding:0;
+    width: 100%;
+    height: 392px;
+  }
+
+  .labelcomponents{
+      position: absolute;
+      font-family:arial,sans-serif;
+  }
+
+  .indicator{
+    background-image: url("res/image/indicator.png");
+    width:16px;
+    height:16px;
+    background-repeat:no-repeat;
+  }
+
+  </style>
+  <body onload="formOnload()" onselectstart="return false;">
+    <script>
+
+    function GetSystemProperties() {
+      return top.getSession("metadata");  
+    }
+
+    var formGUID = '{2C452441-3E53-4239-A8C1-7FC93BF58E4F}';
+    var grids = [];
+    var lookups = [];
+
+    if(top.platform=='ioshtml5'){
+      parent.formGUID = formGUID;
+    }
+
+    function refresh() {
+      //Lookups
+      for (var i=0;i<lookups.length;i++) {
+        lookups[i].refresh();
+      }
+      for (var i=0;i<grids.length;i++) {
+          grids[i].refresh();
+        }
+    }
+
+    function formUnload() {
+        try {  
+          
+        } catch(e) {
+          notifyError(e);
+        }
+    }
+
+    var minHeight = 392;
+    var minWidth = 321;
+
+    function resize() {
+    
+     var width = top.innerWidth;
+     var height = top.innerHeight;
+
+     try{ 
+         $('CRUDSearch').style.width = (top.innerWidth - 70) + 'px';
+     }catch(e){}
+
+
+            var incValue = 0;
+        if (height > minHeight) {
+
+           $('TabelaMensagem').style.height = height+'px';    
+         
+           incValue = (height - minHeight) / minHeight;
+        } else {
+                   // top.body.style.height = height+'px'; 
+           $('TabelaMensagem').style.height = minHeight+'px'; 
+           incValue = 0;
+        }
+        document.body.style.fontSize = parseInt(10 + (10 * incValue))+'pt';
+        
+            resizeInternal();
+        }
+
+    function doResize() {
+          setTimeout(resize,0);
+        //setTimeout(doResize,1000);
+    }
+
+    var supportsOrientationChange = "onorientationchange" in window;
+    var orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+
+    window.addEventListener(orientationEvent, function() {
+        doResize();
+    }, false);
+
+    function getVersionAndroid(){
+      if(navigator.userAgent.indexOf("Android 3") > 0)
+         return "3";
+      else if (navigator.userAgent.indexOf("Android 4") > 0)
+         return "4";
+      else if (navigator.userAgent.indexOf("Android 2") > 0)
+         return "2";	
+    }
+
+    function formOnload() {
+     
+         if(getVersionAndroid() == '4' && $('CRUDSearch') == null){
+                                                                                                                                                     }
+         try{ 
+                $('CRUDSearch').style.width = (top.innerWidth - 70) + 'px';
+         }catch(e){}
+          if (top.platform != 'ioshtml5'){
+                // addtouchMove();       
+          }
+         resize();
+         //Exibe a primeira Aba    	 
+        try {
+          OnEnterForm(); SofiaAoEntrarInicializarRegistros()
+          
+        } catch(e) {
+          notifyError(e);
+        }
+        setTimeout(function() {
+          for (var i=0;i<grids.length;i++) {
+            grids[i].refresh();
+          }
+        },200);
+        if (!top.canBack()) {
+        var i = 1;
+        var sulfix = '';
+        while (true) {
+          if ($('CRUDBack'+sulfix)) {
+            $('CRUDBack'+sulfix).style.display = 'none';
+          i++;
+          if (i < 10) {
+            sulfix = '0'+i;
+          } else {
+            sulfix = i;
+          }
+        } else {
+          break;
+        }
+        }
+        }  
+        resizeInternal();
+    }
+
+    function updateLookups(skipComponent) {
+      for (var i=0;i<lookups.length;i++) {
+        if(skipComponent != lookups[i].id)
+          lookups[i].refresh();
+        }
+    }
+
+    var components = [];
+        components.push('TMAKERMEMO');
+        components.push('TMAKEREDIT');
+        components.push('TMAKEREDIT1');
+        components.push('TMAKEREDIT2');
+        components.push('MakerHiddene06a87e1ac876c4ecdc8ac5ff9cd8e3a');
+        components.push('EDTWCH_CON_ID');
+    
+
+    function ebfFormNextPage(a) {
+       b =  (a==1) ?  window.innerWidth + "px" : '-' + window.innerWidth + "px"; ; 
+       var div = document.getElementById("TabelaMensagem");
+       div.style.left = b ;
+       // P = VELOCIDADE DE PROGRESSAO
+       var p = 10;
+       var f = window.innerWidth/p;
+       for (x=1;x!=f+1;x++) {
+        // T = TEMPO DE PROGRESSAO
+         var t = x*2;
+         setTimeout(function(){
+            
+             left = (a==1) ? (parseInt(div.style.left)-p)  : (parseInt(div.style.left)+p);
+           div.style.left = left + "px";
+           
+         },t);	 
+         
+       }
+    }
+
+    </script>
+    <div id="TabelaMensagem" class="maincontainer">
+    <div style="height:100%;width:100%;z-index:1" id="layout"></div>
+      <script>resize();</script>
+          <center style="display: none">
+          <ul id="tabs">
+    <li name="Cadastro01" class="selected" onClick="ebfFormOpenTab('Cadastro')" >Cadastro</li>      </ul>
+    </center>
+
+        <div id="Cadastro01"  style="display: block"   >
+    
+
+
+  
+
+ 
+
+<!-- TMAKERMEMO -->
+<style>
+#TMAKERMEMO,.TMAKERMEMO{
+    width: 57.63239875389408%;
+    height: 22.70408163265306%;
+    /*background: #FBFFFF;*/	
+    font-size: 80%; 	
+    /*color:#000000;*/
+    /*border: 1px solid #d7d7d7;*/
+    z-index: 0;
+    position: absolute;
+    top:9.183673469387756%;
+    left:5.29595015576324%;
+    
+}
+
+#labelTMAKERMEMO,.labelTMAKERMEMO{
+    top: 7.683673469387756%;
+    left:5.29595015576324%;
+    z-index: 0;
+    line-height: 0px;
+    font-size: 100%;
+}
+</style>
+
+<label id="labelTMAKERMEMO" for="TMAKERMEMO" class="label labelcomponents"  field="WCH_MEN_MENSAGEM"  recordMask="false" ><b> mensagem <font color="red">*</font></b></label>
+<textarea id="TMAKERMEMO" class="memo"  field="WCH_MEN_MENSAGEM"  recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'TMAKEREDIT','memo')" ></textarea>
+<!-- /TMAKERMEMO -->
+
+
+  
+
+  
+
+<!-- TMAKEREDIT -->
+<style>
+#TMAKEREDIT,.TMAKEREDIT{
+    width: 57.63239875389408%;
+    height: 5.357142857142857%;
+    font-size: 80%;  
+    color:#000000;
+    background-color:#FBFFFF;
+    
+    z-index: 1;
+    position: absolute;
+    top:40.56122448979592%;
+    left:4.984423676012461%;
+    border-width: 1px;
+    border-style: solid;
+    /*border-color: #c0c0c0;*/
+}
+
+#labelTMAKEREDIT,.labelTMAKEREDIT{
+    top: 39.56122448979592%;
+    left:4.984423676012461%;
+    z-index: 1;
+    line-height: 0px;
+    font-size: 100%;
+}
+
+#imgTMAKEREDIT{
+    z-index: 1;
+    top:40.56122448979592%;
+    position: absolute;
+    left: 65.61682242990653%;
+    height: 19px;
+    width: 19px;
+}
+</style>
+<!-- Index: -1 > -1 -->
+
+<label id="labelTMAKEREDIT"  for="TMAKEREDIT" class="label labelcomponents">Data/hora</label>
+
+
+
+  <input  id="TMAKEREDIT"   field="WCH_MEN_DATA_HORA"  recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'TMAKEREDIT1','datetime')" dateValue="" disabled="disabled"       />
+ 
+
+<img src="res/image/calendar.png" class="imgCalendar" id="imgTMAKEREDIT" onclick="clickAction(this, function() { openCalendarDateTime('TMAKEREDIT', ebfFormGetComponentValue('TMAKEREDIT')) })"   field="WCH_MEN_DATA_HORA"  recordMask="false" >
+
+
+<script>
+
+
+
+</script>
+<!-- /TMAKEREDIT -->
+
+
+  
+
+  
+
+<!-- TMAKEREDIT1 -->
+<style>
+#TMAKEREDIT1,.TMAKEREDIT1{
+    width: 37.69470404984423%;
+    height: 5.357142857142857%;
+    font-size: 80%;  
+    color:#000000;
+    background-color:#FBFFFF;
+    
+    z-index: 3;
+    position: absolute;
+    top:71.42857142857143%;
+    left:4.672897196261682%;
+    border-width: 1px;
+    border-style: solid;
+    /*border-color: #c0c0c0;*/
+}
+
+#labelTMAKEREDIT1,.labelTMAKEREDIT1{
+    top: 70.42857142857143%;
+    left:4.672897196261682%;
+    z-index: 3;
+    line-height: 0px;
+    font-size: 100%;
+}
+
+#imgTMAKEREDIT1{
+    z-index: 3;
+    top:71.42857142857143%;
+    position: absolute;
+    left: 45.36760124610591%;
+    height: 19px;
+    width: 19px;
+}
+</style>
+<!-- Index: -1 > -1 -->
+
+<label id="labelTMAKEREDIT1"  for="TMAKEREDIT1" class="label labelcomponents">usuario</label>
+
+
+         <input type="text" id="TMAKEREDIT1"   field="WCH_MEN_USUARIO"  maxlength="20" recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'TMAKEREDIT2','text')"      />
+   
+
+
+<script>
+
+
+
+</script>
+<!-- /TMAKEREDIT1 -->
+
+
+  
+
+  
+
+<!-- TMAKEREDIT2 -->
+<style>
+#TMAKEREDIT2,.TMAKEREDIT2{
+    width: 37.69470404984423%;
+    height: 5.357142857142857%;
+    font-size: 80%;  
+    color:#000000;
+    background-color:#FBFFFF;
+    
+    z-index: 4;
+    position: absolute;
+    top:84.18367346938776%;
+    left:4.672897196261682%;
+    border-width: 1px;
+    border-style: solid;
+    /*border-color: #c0c0c0;*/
+}
+
+#labelTMAKEREDIT2,.labelTMAKEREDIT2{
+    top: 83.18367346938776%;
+    left:4.672897196261682%;
+    z-index: 4;
+    line-height: 0px;
+    font-size: 100%;
+}
+
+#imgTMAKEREDIT2{
+    z-index: 4;
+    top:84.18367346938776%;
+    position: absolute;
+    left: 45.36760124610591%;
+    height: 19px;
+    width: 19px;
+}
+</style>
+<!-- Index: -1 > -1 -->
+
+<label id="labelTMAKEREDIT2"  for="TMAKEREDIT2" class="label labelcomponents">Id_aux</label>
+
+
+         <input type="text" id="TMAKEREDIT2"   field="WCH_MEN_ID_AUX"  maxlength="200" recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'EDTWCH_CON_ID','text')"      />
+   
+
+
+<script>
+
+
+
+</script>
+<!-- /TMAKEREDIT2 -->
+
+
+   
+
+  
+
+<!-- MakerHiddene06a87e1ac876c4ecdc8ac5ff9cd8e3a -->
+<input field="wch_men_id" id="MakerHiddene06a87e1ac876c4ecdc8ac5ff9cd8e3a" type="hidden"/>
+<!-- /MakerHiddene06a87e1ac876c4ecdc8ac5ff9cd8e3a -->
+
+
+   
+
+  
+
+<!-- EDTWCH_CON_ID -->
+<style>
+#EDTWCH_CON_ID,.EDTWCH_CON_ID{
+    width:  80.61993769470405%;
+    height: 5.357142857142857%; 
+   /* background: #FBFFFF;	*/
+    font-size: 80%; 
+    /*color:#000000;*/
+    
+   /* border: 1px solid #c0c0c0; */
+    top:56.12244897959183%;
+    left:4.984423676012461%;
+    z-index: 2;
+    position: absolute;
+    vertical-align:center;
+}
+#labelEDTWCH_CON_ID,.labelEDTWCH_CON_ID{
+    top: 54.62244897959183%;
+    left: 4.984423676012461%;
+    z-index:  2;     line-height: 0px;
+    /*font-size: 100%;*/
+}
+
+#imgEDTWCH_CON_ID{
+    z-index: 2;
+    top:56.12244897959183%;
+    position: absolute;
+    left: 86.6043613707165%;
+    height: 19px;
+    width: 19px;
+}
+</style>
+        <label id="labelEDTWCH_CON_ID" for="EDTWCH_CON_ID" class="label labelcomponents"  field="WCH_CON_ID"  recordMask="false" masktype="Inteiro">contexto</label>
+<img src="res/image/empty.gif" class="imgLookup" id=imgEDTWCH_CON_ID onclick="clickAction(this, function() { ebfFormOpenForm('{716CAED5-0B61-448D-95E9-7FC93BF58E4F}'); })"  field="WCH_CON_ID"  recordMask="false" masktype="Inteiro">
+<select class="" size="1" name="EDTWCH_CON_ID" id="EDTWCH_CON_ID"   field="WCH_CON_ID"  recordMask="false" masktype="Inteiro"   onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'TMAKERMEMO','number')">
+  <option value=""></option>
+</select>
+<script>
+  EDTWCH_CON_ID.refresh = function() { 
+     loadLookup('EDTWCH_CON_ID', 'wch_con_id', 'wch_con_descricao', 'integer' , 'string');
+  }
+  lookups.push($('EDTWCH_CON_ID'));
+</script>
+
+<!-- [{description=wch_con_id, fieldname=wch_con_id, precision=null, scale=null, size=0, type=integer}, {description=wch_con_descricao, fieldname=wch_con_descricao, precision=null, scale=null, size=100, type=string}] -->
+<!-- /EDTWCH_CON_ID -->
+    </div>
+        </div>
+  </body>
+</html>

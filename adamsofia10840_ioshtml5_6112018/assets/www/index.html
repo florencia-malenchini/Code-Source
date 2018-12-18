@@ -1,0 +1,470 @@
+<html>
+  <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=no, viewport-fit=cover" />
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <script type="text/javascript" src="functions.js"></script>
+      <script type="text/javascript" src="native.js" charset="iso-8859-1"></script>
+      <script type="text/javascript" src="properties.js" charset="iso-8859-1"></script>
+      <script type="text/javascript" src="rules.js" charset="iso-8859-1"></script>
+      <script type="text/javascript" src="translations.json"></script>
+      <link rel="stylesheet" href="default.css">
+        </head>
+<script>
+
+    var messageflow = "";
+    var messageparams = "";
+    var backEvent = "";
+    var backParams = "";
+    var backFormCaller = '{00000000-0000-0000-0000-000000000000}';
+    var currentForm = '{00000000-0000-0000-0000-000000000001}';
+    var formGUID = backFormCaller;
+    var viewZindex = 0;
+    var sessionValues = {};
+    var views = [];
+    var viewsByGuid = {};
+    var currentOrientation = 0;
+    var paramsByGuid = {};
+    var reqByCode = {};
+    top.platform = 'ioshtml5';
+
+    function handleException(errorMsg, url, lineNumber) {
+      alert("Ocorreu um erro ao realizar a ação: " + errorMsg);
+      console.log("Ocorreu um erro ao realizar a ação: " + errorMsg + "\n" + "Local: " + url + "\n" + "Linha: " + lineNumber);
+      return false;
+    }
+
+    function showPushMessage(parametro) {
+      messageflow = ebfGetAllPreferences("pushFlowPreferences")
+      try {
+        parametro = JSON.parse(parametro);
+        var list = ebfListParamsCreate(parametro);
+        if (messageflow != "") {
+          top.eval(messageflow).apply(this, [list][0]);
+        }
+      } catch (e) {
+        var list = ebfListParamsCreate(parametro);
+        if (messageflow != "") {
+          top.eval(messageflow).apply(this, [list][0]);
+        }
+      }
+    }
+
+    function onBecomeActive() {
+      flowName = ebfGetAllPreferences("onBecomeActive")
+
+      if(flowName != ""){
+        jsonArgs = JSON.parse("{}");
+        jsonArgs["winTarget"] = currentForm;
+        jsonArgs["funName"] = flowName;
+        jsonArgs["funArgs"] = new Array();
+        execFuncOnTarget(jsonArgs);
+      }
+
+    }
+
+    function CameraImageFromField(values) {
+      result = values.split(",");
+      var ObjectReference = result[0];
+      var FormReference = result[1];
+      var destination = result[2];
+      ebfChangeComponentValueOtherForm(FormReference, ObjectReference, destination);
+    }
+
+    function showconfirmreturn(values, paramFormGUID) {
+      formGUID = paramFormGUID;
+      if (values.indexOf(",") == -1) {
+        window[values]();
+      } else {
+        var result = values.split(",");
+        var func = result[0];
+        var params = "'" + result[1] + "'";
+        for (var cont = 2; cont < result.length; cont++) {
+          params = params + "," + "'" + result[cont] + "'";
+        }
+        func = func.toString();
+        params = ebfReplaceAll(params, "'", "");
+        top.callFunction(formGUID, func, [params]);
+      }
+    }
+
+    function BarcodeUtilsreturn(values) {
+      result = values.split(",");
+      var funcSucess = result[0];
+      var qrCodeValue = result[1];
+      var formReference = result[2];
+      top.callFunction(formReference, funcSucess, [qrCodeValue]);
+    }
+
+    function getQrcodeUtils() {
+      if (!window._barCodeUtils) {
+        window._barCodeUtils = new BarcodeUtils();
+      }
+      return window._barCodeUtils;
+    }
+
+    function createRequest(success, fail, form) {
+      var id = parseInt((Math.random() * 99999999999));
+      reqByCode[id] = [success, fail, form];
+      return id;
+    }
+
+    function executeRequestReturn(values) {
+      var func = '';
+      var form = '';
+      var i = 2;
+      var pList = [];
+      result = values.split(",");
+      var action = result[0];
+      var reqId = result[1];
+      for (i = 2; i < result.length; i++) {
+        pList.push(result[i]);
+      }
+      var params = reqByCode[reqId];
+      if (action == 1) {
+        func = params[0];
+      } else {
+        func = params[1];
+        if (action == 0) {
+          pList = ['cancelled'];
+        } else {
+          pList = ['error'];
+        }
+      }
+      form = params[2];
+      reqByCode[reqId] = null;
+      top.callFunction(form, func, pList);
+    }
+
+    function CameraImage(values) {
+      result = values.split(",");
+      var funcsuccess = result[0];
+      var funcfail = result[1];
+      var formGUID = result[2];
+      var destination = result[3];
+      top.callFunction(formGUID, funcsuccess, [destination])
+    }
+
+    function GetFileChooser(values) {
+      result = values.split(",");
+      var funcsuccess = result[0];
+      var funcfail = result[1];
+      var formGUID = result[3];
+      var destination = result[4];
+      top.callFunction(formGUID, funcsuccess, [destination])
+    }
+
+    if (platform == 'ioshtml5') {
+      top.path = ebfFileBase();
+    }
+    var databaseInstance = -1;
+
+    function getA920Utils() {
+      if (!window._A920Utils) {
+        window._A920Utils = new A920Utils();
+      }
+      return window._A920Utils;
+    }
+
+    function getLocalDataBase(name, init) {
+      if (!window._localDatabase) {
+        var d = new Database();
+        databaseInstance = d.openOrCreateDatabase(name);
+        window._localDatabase = d;
+      }
+      return window._localDatabase;
+    }
+
+    function getCameraUtils() {
+      if (!window._cameraUtils) {
+        window._cameraUtils = new CameraUtils();
+      }
+      return window._cameraUtils;
+    }
+
+    function getPushNotification() {
+      if (!window._PushNotification) {
+        window._PushNotification = new PushNotification();
+      }
+      return window._PushNotification;
+    }
+
+    function getFileManager() {
+      if (!window._fileManager) {
+        window._fileManager = new FileUtils();
+      }
+      return window._fileManager;
+    }
+
+    function getLocationUtils() {
+      if (!window._locationUtils) {
+        window._locationUtils = new LocationUtils();
+      }
+      return window._locationUtils;
+    }
+
+    function getUtils() {
+      if (!window._Utils) {
+        window._Utils = new Utils();
+      }
+      return window._Utils;
+    }
+	
+	function getAudioUtils() {
+      if (!window._AudioUtils) {
+        window._AudioUtils = new AudioUtils();
+      }
+      return window._AudioUtils;
+    }
+	
+	 function getWazeUtils() {
+      if (!window._wazeUtils) {
+        window._wazeUtils = new WazeUtils();
+      }
+      return window._wazeUtils;
+    }
+    
+    function getFingerprintUtils() {
+        if (!window._FingerprintUtils) {
+            window._FingerprintUtils = new FingerprintUtils();
+        }
+        return window._FingerprintUtils;
+    }
+	
+    function shouldRotateToOrientation(orientation) {
+      if (getCameraUtils().isActive()) {
+        return orientation == 90;
+      } else {
+        return orientation == 0;
+      }
+    }
+    
+    function openView(url, guid, onclose) {
+      window.scrollTo(0, 0);
+      guid = guid || '{00000000-0000-0000-0000-000000000000}';
+      showIndeterminateProgressBar(true);
+      var currentForm = '';
+      if (views.length > 0) {
+        currentForm = views[views.length - 1].guid;
+        views[views.length - 1].style.left = '-2000px';
+      }
+      var id = 'IFRAME' + parseInt((Math.random() * 9999999));
+      var width = screen.width;
+      var height = screen.height;
+      viewZindex++;
+      var div = document.createElement("div");
+      div.style.position = 'absolute';
+      div.style.width = '100%';
+      div.style.height = '100%';
+      div.style.left = '0px';
+      div.style.top = '0px';
+      div.style.zIndex = viewZindex;
+      div.guid = guid;
+      div.frameId = id;
+      div.parentForm = currentForm;
+      div.onclose = onclose;
+      views.push(div);
+      viewsByGuid[guid] = div;
+      if (url.indexOf('.html?') >= 0) {
+        var uri = url.split('.html?');
+        paramsByGuid[guid] = uri[1];
+        url = uri[0] + '.html';
+      } else {
+        paramsByGuid[guid] = '';
+      }
+      window.document.body.appendChild(div);
+      var iframe = document.createElement("iframe");
+      iframe.id = id;
+      iframe.src = url;
+      iframe.style.position = 'absolute';
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.left = '0px';
+      iframe.style.top = '0px';
+      iframe.frameBorder = 0;
+      iframe.border = 0;
+      iframe.marginwidth = 0;
+      iframe.marginheight = 0;
+      iframe.onLoad = showIndeterminateProgressBar(false);
+      div.appendChild(iframe);
+      if (views.length > 1) {
+        views[views.length - 2].style.display = 'none';
+        views[views.length - 2].getElementsByTagName('iframe')[0].contentDocument.body.style.display = "none";
+      } else {
+        window.document.getElementById('LoadView').style.display = 'none';
+      }
+    }
+
+    function backbutton() {
+      if (backEvent != "") {
+        return getWindow(backFormCaller).window[backEvent].apply(getWindow(backFormCaller), backParams);
+      }
+      if (views.length > 1) {
+        closeView(views[views.length - 1].guid);
+        return;
+      }
+      Bridge.exec('App', 'goBack', parseJSON([]));
+    }
+
+    function closeApp() {
+      var r = window.confirm('Deseja sair da aplicação?');
+      if (r) {
+        Bridge.exec('App', 'exit', parseJSON([]));
+      }
+    }
+
+    function closeView(guid, button) {
+      var onclick = null;
+      try {
+        if (button) {
+          onclick = button.onclick;
+          button.onclick = null;
+        }
+        if (views.length > 0) {
+          var view = viewsByGuid[guid];
+          if (!view) {
+            return;
+          }
+          if (view.onclose) {
+            try {
+              view.onclose();
+            } catch (e) {
+              //Abafa
+            }
+          }
+          var viewFrame = view.getElementsByTagName("iframe")[0];
+          if (viewFrame.contentWindow.formUnload) {
+            viewFrame.contentWindow.formUnload();
+          }
+          var idx = views.indexOf(view);
+          views.splice(idx, 1);
+          window.document.body.removeChild(view);
+          viewsByGuid[guid] = null;
+          paramsByGuid[guid] = null;
+        }
+        if (views.length > 0) {
+          views[views.length - 1].style.display = 'block';
+          views[views.length - 1].style.left = '0px';
+          var parentFrame = views[views.length - 1].getElementsByTagName("iframe")[0];
+          parentFrame.contentDocument.body.style.display = "block";
+          if (parentFrame && parentFrame.contentWindow.refresh) {
+            parentFrame.contentWindow.refresh();
+          };
+          //alteracao para resolver problema do retornar (screen truncate).
+          div = document.createElement("div");
+          div.setAttribute('id', 'divBlockTT');
+          div.setAttribute('style', 'height:0px; background-color:black; ');
+          document.body.appendChild(div);
+        }
+      } finally {
+        if (button) {
+          button.onclick = onclick;
+        }
+      }
+    }
+
+    function getURLParameter(guid) {
+      return paramsByGuid[guid];
+    }
+
+    function getParentWindow(win) {
+      var view = viewsByGuid[win.formGUID];
+      for (var i = 0; i < views.length; i++) {
+        if (view == views[i] && i > 0) {
+          return views[i - 1].firstChild.contentWindow;
+        }
+      }
+    }
+
+    function getWindow(guid) {
+      if (guid == '{00000000-0000-0000-0000-000000000000}' || guid == undefined) {
+        return window;
+      } else {
+        var c = viewsByGuid[guid];
+        if (c == null || c == 'undefined') {
+          guid = '{00000000-0000-0000-0000-000000000000}';
+          return viewsByGuid[guid].firstChild.contentWindow;
+        } else {
+          return c.firstChild.contentWindow;
+        }
+      }
+    }
+
+    function callFunction(guid, func, params) {
+      var win;
+      if (typeof guid == 'string') {
+        win = getWindow(guid);
+      } else {
+        win = guid;
+      }
+      win.eval(func).apply(win, params)
+    }
+    /**
+      JSON com as seguintes chaves:
+      winTarget: Onde será executada a function
+      funName  : Nome da função
+      funArgs  : Parâmetros da função
+    **/
+    function execFuncOnTarget(jsonArgs) {
+      var win;
+      if (jsonArgs.winTarget == currentForm) {
+        win = getWindow((top.views[top.views.length - 1]) ? (top.views[top.views.length - 1]).guid : undefined);
+      } else if (typeof jsonArgs.winTarget == 'string') {
+        win = getWindow(jsonArgs.winTarget);
+      } else {
+        win = jsonArgs.winTarget;
+      }
+      win.eval(jsonArgs.funName).apply(win, jsonArgs.funArgs)
+    }
+
+    function canBack() {
+      return (views.length > 1);
+    }
+
+    function setSession(name, value) {
+      sessionValues[name] = value;
+    }
+
+    function getSession(name) {
+      return sessionValues[name];
+    }    
+    
+    function onLoad(){
+      var time = 1000;      
+                  var img = "res/image/45720379F4A14BA19A3ABC02330D8D11.png";
+      
+            
+      var full = document.createElement("div");
+      full.innerHTML = '<table name="LoadView" id="LoadView" cellpadding="0" cellspacing="0" border="0" width="100%" height="100%" style="background-image: url('+ img + ');background-repeat: no-repeat;background-size: 100% 100%;"><tbody><tr><td valign="middle" align="center"></td></tr></tbody></table>';
+      document.body.appendChild(full);
+    
+      setTimeout(function() {
+        getLocalDataBase(GetSystemProperties().get("syscode"),false);
+        CreateSystemDatabase();
+        setSession("metadata", GetSystemProperties(), true);
+        var openDefaultForm = true;
+          
+      if(openDefaultForm){
+              openView('Sofia.html');
+            }
+        getUtils().returnNotification();
+      },time);
+    }
+    
+    function showIndeterminateProgressBar(show) {
+      document.getElementById('indeterminateProgressBar').style.display = show ? 'display' : 'none'
+    }
+
+    if(platform == "ioshtml5"){
+      //Sobrescreve o alerta do Windows para remover o ".html" do título
+      window.alert = function(message) {getUtils().showAlert(" ",message);};
+      alert = function(message) {getUtils().showAlert(" ",message);};
+      window.Tracking = function () {getTracking();};
+    }
+</script>
+  <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="onLoad();">
+    <div id="indeterminateProgressBar" class="progress" style = "display: none">
+      <div class="indeterminate"></div>
+    </div>
+  </body>
+</html>

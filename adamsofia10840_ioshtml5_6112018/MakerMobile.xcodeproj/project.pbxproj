@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		88074D7D1F72CEDE0022AF5B /* FirebaseDatabaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88074D7C1F72CEDE0022AF5B /* FirebaseDatabaseUtils.swift */; };
+		880F28D31F05377200DBF108 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 880F28D21F05377200DBF108 /* Images.xcassets */; };
+		8847CBEE1F754725002512AC /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8847CBED1F754725002512AC /* Extension.swift */; };
+		88764AEE1F4F0CA1007416AF /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88764AED1F4F0CA1007416AF /* Accelerate.framework */; };
+		88764AF01F4F0CA7007416AF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88764AEF1F4F0CA7007416AF /* CoreData.framework */; };
+		88764AF21F4F0CAE007416AF /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88764AF11F4F0CAE007416AF /* SystemConfiguration.framework */; };
+		8880380D1F17FC720003CDDD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8880380C1F17FC720003CDDD /* libsqlite3.tbd */; };
+		8881D6881F44796F00039D4D /* AuthUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881D6861F44796F00039D4D /* AuthUtils.swift */; };
+		8881D6891F44796F00039D4D /* LocationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881D6871F44796F00039D4D /* LocationUtils.swift */; };
+		8883F4721F055D3600C349B6 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8883F4711F055D3600C349B6 /* SafariServices.framework */; };
+		8885788D1F2B711F00622D86 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888578821F2B711F00622D86 /* Bridge.swift */; };
+		8885788E1F2B711F00622D86 /* CameraUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888578831F2B711F00622D86 /* CameraUtils.swift */; };
+		888578901F2B711F00622D86 /* DatabaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888578851F2B711F00622D86 /* DatabaseUtils.swift */; };
+		888578911F2B711F00622D86 /* FilesUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888578861F2B711F00622D86 /* FilesUtils.swift */; };
+		888578921F2B711F00622D86 /* MakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888578871F2B711F00622D86 /* MakerViewController.swift */; };
+		888578931F2B711F00622D86 /* NetworkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888578881F2B711F00622D86 /* NetworkUtils.swift */; };
+		888578951F2B711F00622D86 /* TrackerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8885788A1F2B711F00622D86 /* TrackerUtils.swift */; };
+		8885789F1F2B717400622D86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888578971F2B717400622D86 /* AppDelegate.swift */; };
+		888579D51F34960D00622D86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 888579D41F34960D00622D86 /* Main.storyboard */; };
+		888579DC1F34A0CA00622D86 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 888579DB1F34A0CA00622D86 /* assets */; };
+		88A698AC1FCC5AA30061AF41 /* NotificationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A698AB1FCC5AA30061AF41 /* NotificationUtils.swift */; };
+		88AA89141FD6EFF100FF29F8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AA89131FD6EFF100FF29F8 /* Reachability.swift */; };
+		88ED60BF1F55BAE90039FF90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 88ED60BE1F55BAE90039FF90 /* GoogleService-Info.plist */; };
+        C50250BB1FF4A70900F9E623 /* GeoFireUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50250BA1FF4A70900F9E623 /* GeoFireUtils.swift */; };
+        C5D28934206B14D40069F25E /* AudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D28933206B14D40069F25E /* AudioUtils.swift */; };
+		90D0B06120CB06B0000483C5 /* FingerPrintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D0B06020CB06B0000483C5 /* FingerPrintUtils.swift */; };
+
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		88074D7C1F72CEDE0022AF5B /* FirebaseDatabaseUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseDatabaseUtils.swift; path = Classes/FirebaseDatabaseUtils.swift; sourceTree = "<group>"; };
+		880F28C81F05377200DBF108 /* MakerMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MakerMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		880F28D21F05377200DBF108 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8847CBED1F754725002512AC /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = Resources/Extension.swift; sourceTree = "<group>"; };
+		88764AED1F4F0CA1007416AF /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		88764AEF1F4F0CA7007416AF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		88764AF11F4F0CAE007416AF /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8880380C1F17FC720003CDDD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		8881D6861F44796F00039D4D /* AuthUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthUtils.swift; path = Classes/AuthUtils.swift; sourceTree = "<group>"; };
+		8881D6871F44796F00039D4D /* LocationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationUtils.swift; path = Classes/LocationUtils.swift; sourceTree = "<group>"; };
+		8883F4711F055D3600C349B6 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		888578821F2B711F00622D86 /* Bridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bridge.swift; path = Classes/Bridge.swift; sourceTree = "<group>"; };
+		888578831F2B711F00622D86 /* CameraUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraUtils.swift; path = Classes/CameraUtils.swift; sourceTree = "<group>"; };
+		888578851F2B711F00622D86 /* DatabaseUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatabaseUtils.swift; path = Classes/DatabaseUtils.swift; sourceTree = "<group>"; };
+		888578861F2B711F00622D86 /* FilesUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilesUtils.swift; path = Classes/FilesUtils.swift; sourceTree = "<group>"; };
+		888578871F2B711F00622D86 /* MakerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MakerViewController.swift; path = Classes/MakerViewController.swift; sourceTree = "<group>"; };
+		888578881F2B711F00622D86 /* NetworkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkUtils.swift; path = Classes/NetworkUtils.swift; sourceTree = "<group>"; };
+		8885788A1F2B711F00622D86 /* TrackerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrackerUtils.swift; path = Classes/TrackerUtils.swift; sourceTree = "<group>"; };
+		888578971F2B717400622D86 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Resources/AppDelegate.swift; sourceTree = "<group>"; };
+		8885789C1F2B717400622D86 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
+		8885789D1F2B717400622D86 /* MakerMobile-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MakerMobile-Bridging-Header.h"; path = "Resources/MakerMobile-Bridging-Header.h"; sourceTree = "<group>"; };
+		8885789E1F2B717400622D86 /* MakerMobile.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = MakerMobile.entitlements; path = Resources/MakerMobile.entitlements; sourceTree = "<group>"; };
+		888579D41F34960D00622D86 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Resources/Main.storyboard; sourceTree = "<group>"; };
+		888579DB1F34A0CA00622D86 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		88A698AB1FCC5AA30061AF41 /* NotificationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationUtils.swift; path = MakerMobile/Classes/NotificationUtils.swift; sourceTree = "<group>"; };
+		88AA89131FD6EFF100FF29F8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = Resources/Reachability.swift; sourceTree = "<group>"; };
+		88ED60BE1F55BAE90039FF90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Resources/GoogleService-Info.plist"; sourceTree = "<group>"; };
+        C50250BA1FF4A70900F9E623 /* GeoFireUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeoFireUtils.swift; path = Classes/GeoFireUtils.swift; sourceTree = "<group>"; };
+        C5D28933206B14D40069F25E /* AudioUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioUtils.swift; path = Classes/AudioUtils.swift; sourceTree = "<group>"; };
+     	90D0B06020CB06B0000483C5 /* FingerPrintUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FingerPrintUtils.swift; path = Classes/FingerPrintUtils.swift; sourceTree = "<group>"; };/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		880F28C51F05377200DBF108 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88764AF21F4F0CAE007416AF /* SystemConfiguration.framework in Frameworks */,
+				88764AF01F4F0CA7007416AF /* CoreData.framework in Frameworks */,
+				88764AEE1F4F0CA1007416AF /* Accelerate.framework in Frameworks */,
+				8880380D1F17FC720003CDDD /* libsqlite3.tbd in Frameworks */,
+				8883F4721F055D3600C349B6 /* SafariServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		880F28BF1F05377200DBF108 = {
+			isa = PBXGroup;
+			children = (
+				888579DB1F34A0CA00622D86 /* assets */,
+				880F28CA1F05377200DBF108 /* MakerMobile */,
+				880F28C91F05377200DBF108 /* Products */,
+				8883F4701F055D3500C349B6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		880F28C91F05377200DBF108 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				880F28C81F05377200DBF108 /* MakerMobile.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		880F28CA1F05377200DBF108 /* MakerMobile */ = {
+			isa = PBXGroup;
+			children = (
+				880F28E41F053B6100DBF108 /* Classes */,
+				880F28E01F053AE900DBF108 /* Support Files */,
+			);
+			path = MakerMobile;
+			sourceTree = "<group>";
+		};
+		880F28E01F053AE900DBF108 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8885789E1F2B717400622D86 /* MakerMobile.entitlements */,
+				8885789D1F2B717400622D86 /* MakerMobile-Bridging-Header.h */,
+				88ED60BE1F55BAE90039FF90 /* GoogleService-Info.plist */,
+				8885789C1F2B717400622D86 /* Info.plist */,
+				888579D41F34960D00622D86 /* Main.storyboard */,
+				8847CBED1F754725002512AC /* Extension.swift */,
+				880F28D21F05377200DBF108 /* Images.xcassets */,
+				88AA89131FD6EFF100FF29F8 /* Reachability.swift */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
+		880F28E41F053B6100DBF108 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				888578971F2B717400622D86 /* AppDelegate.swift */,
+				888578821F2B711F00622D86 /* Bridge.swift */,
+				888578871F2B711F00622D86 /* MakerViewController.swift */,
+				8819A7501F3E427200027472 /* Utils */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		8819A7501F3E427200027472 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				90D0B06020CB06B0000483C5 /* FingerPrintUtils.swift */,  
+                C5D28933206B14D40069F25E /* AudioUtils.swift */,            
+                C50250BA1FF4A70900F9E623 /* GeoFireUtils.swift */,
+				8881D6861F44796F00039D4D /* AuthUtils.swift */,
+				888578831F2B711F00622D86 /* CameraUtils.swift */,
+				888578851F2B711F00622D86 /* DatabaseUtils.swift */,
+				888578861F2B711F00622D86 /* FilesUtils.swift */,
+				88074D7C1F72CEDE0022AF5B /* FirebaseDatabaseUtils.swift */,
+				8881D6871F44796F00039D4D /* LocationUtils.swift */,
+				888578881F2B711F00622D86 /* NetworkUtils.swift */,
+				8885788A1F2B711F00622D86 /* TrackerUtils.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		8883F4701F055D3500C349B6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				88764AF11F4F0CAE007416AF /* SystemConfiguration.framework */,
+				88764AEF1F4F0CA7007416AF /* CoreData.framework */,
+				88764AED1F4F0CA1007416AF /* Accelerate.framework */,
+				8880380C1F17FC720003CDDD /* libsqlite3.tbd */,
+				8883F4711F055D3600C349B6 /* SafariServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		880F28C71F05377200DBF108 /* MakerMobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 880F28DA1F05377200DBF108 /* Build configuration list for PBXNativeTarget "MakerMobile" */;
+			buildPhases = (
+				880F28C41F05377200DBF108 /* Sources */,
+				880F28C51F05377200DBF108 /* Frameworks */,
+				880F28C61F05377200DBF108 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MakerMobile;
+			productName = MakerMobile;
+			productReference = 880F28C81F05377200DBF108 /* MakerMobile.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		880F28C01F05377200DBF108 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = SoftwellSolutions;
+				TargetAttributes = {
+					880F28C71F05377200DBF108 = {
+						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 880F28C31F05377200DBF108 /* Build configuration list for PBXProject "MakerMobile" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 880F28BF1F05377200DBF108;
+			productRefGroup = 880F28C91F05377200DBF108 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				880F28C71F05377200DBF108 /* MakerMobile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		880F28C61F05377200DBF108 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				888579DC1F34A0CA00622D86 /* assets in Resources */,
+				88ED60BF1F55BAE90039FF90 /* GoogleService-Info.plist in Resources */,
+				880F28D31F05377200DBF108 /* Images.xcassets in Resources */,
+				888579D51F34960D00622D86 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		880F28C41F05377200DBF108 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88AA89141FD6EFF100FF29F8 /* Reachability.swift in Sources */,
+				88A698AC1FCC5AA30061AF41 /* NotificationUtils.swift in Sources */,
+				88074D7D1F72CEDE0022AF5B /* FirebaseDatabaseUtils.swift in Sources */,
+				8881D6891F44796F00039D4D /* LocationUtils.swift in Sources */,
+				8885788E1F2B711F00622D86 /* CameraUtils.swift in Sources */,
+				888578921F2B711F00622D86 /* MakerViewController.swift in Sources */,
+				8885788D1F2B711F00622D86 /* Bridge.swift in Sources */,
+				8881D6881F44796F00039D4D /* AuthUtils.swift in Sources */,
+				888578931F2B711F00622D86 /* NetworkUtils.swift in Sources */,
+				888578901F2B711F00622D86 /* DatabaseUtils.swift in Sources */,
+				8847CBEE1F754725002512AC /* Extension.swift in Sources */,
+				888578951F2B711F00622D86 /* TrackerUtils.swift in Sources */,
+				888578911F2B711F00622D86 /* FilesUtils.swift in Sources */,
+				8885789F1F2B717400622D86 /* AppDelegate.swift in Sources */,
+                C50250BB1FF4A70900F9E623 /* GeoFireUtils.swift in Sources */,
+                C5D28934206B14D40069F25E /* AudioUtils.swift in Sources */,
+				90D0B06120CB06B0000483C5 /* FingerPrintUtils.swift in Sources */,			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		880F28D81F05377200DBF108 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		880F28D91F05377200DBF108 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		880F28DB1F05377200DBF108 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MakerMobile/Resources/MakerMobile.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/MakerMobile/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MakerMobile",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MakerMobile/Resources/MakerMobile-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		880F28DC1F05377200DBF108 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MakerMobile/Resources/MakerMobile.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "$(SRCROOT)/MakerMobile/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MakerMobile",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MakerMobile/Resources/MakerMobile-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		880F28C31F05377200DBF108 /* Build configuration list for PBXProject "MakerMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				880F28D81F05377200DBF108 /* Debug */,
+				880F28D91F05377200DBF108 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		880F28DA1F05377200DBF108 /* Build configuration list for PBXNativeTarget "MakerMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				880F28DB1F05377200DBF108 /* Debug */,
+				880F28DC1F05377200DBF108 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 880F28C01F05377200DBF108 /* Project object */;
+}

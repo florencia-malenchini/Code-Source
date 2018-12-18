@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Date</title>
+    <link rel="stylesheet" href="stylehtml.css">
+    <link rel="stylesheet" href="stylegray.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <script type="text/javascript" src="functions.js" charset="iso-8859-1"></script>
+    <script type="text/javascript" src="rules.js" charset="iso-8859-1"></script>
+    <script type="text/javascript" src="masks.js" charset="iso-8859-1"></script>
+  </head>
+<style>
+body{
+    font-size: 10pt;
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+}
+
+#BackButton {
+    width: 21%;
+    height: 27px;
+    font-family: Arial;
+    font-size: 8pt; 	
+    font-weight:bold;
+    text-align:center;
+    position: absolute;
+    top:11px;
+    left: 3%;
+    z-index: 9999;
+}
+
+#Date{
+    position: relative;
+    margin:0;
+    padding:0;
+    width: 100%;
+    height: 377px;
+}
+
+.labelcomponents{
+    position: absolute;
+    font-family:arial,sans-serif;
+}
+
+.bevel{
+
+}
+
+.indicator{
+
+    background-image: url("res/image/indicator.png");
+    width:16px;
+    height:16px;
+    background-repeat:no-repeat;
+}
+</style>
+<body onload="formOnload()" onselectstart="return false;">
+<script>
+
+function GetSystemProperties() {
+  return top.getSession("metadata");  
+}
+
+var formGUID = '{87881794-F5A8-452B-96FD-52B38AAB5090}';
+var grids = [];
+var lookups = [];
+
+function refresh() {
+  //Lookups
+  for (var i=0;i<lookups.length;i++) {
+   	lookups[i].refresh();
+  }
+  for (var i=0;i<grids.length;i++) {
+	  	grids[i].refresh();
+	  }
+}
+
+function formUnload() {
+    try {  
+      
+    } catch(e) {
+      notifyError(e);
+    }
+}
+
+var minHeight = 377;
+var minWidth = 320;
+
+function resize() {
+  setTimeout(function() {
+
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+ 
+    var incValue = 0;
+    if (height > minHeight) {
+
+       $('Date').style.height = height+'px';    
+	             $('Date').style.width = width+'px';
+       
+       incValue = (height - minHeight) / minHeight;
+    } else {
+	             $('Date').style.width = width+'px';
+             // top.body.style.height = height+'px'; 
+       $('Date').style.height = minHeight+'px'; 
+       incValue = 0;
+    }
+    document.body.style.fontSize = parseInt(10 + (10 * incValue))+'pt';
+    
+    resizeInternal();
+  },100);
+}
+
+function doResize() {
+  setTimeout(resize,500);
+//setTimeout(doResize,1000);
+}
+
+var supportsOrientationChange = "onorientationchange" in window;
+var orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+
+window.addEventListener(orientationEvent, function() {
+    doResize();
+}, false);
+
+function getVersionAndroid(){
+	if(navigator.userAgent.indexOf("Android 3") > 0)
+	   return "3";
+	else if (navigator.userAgent.indexOf("Android 4") > 0)
+	   return "4";
+	else if (navigator.userAgent.indexOf("Android 2") > 0)
+	   return "2";	
+}
+
+function formOnload() {
+ 
+     if(getVersionAndroid() == '4' && $('CRUDSearch') == null){
+               	   CRUDHeader1.style.position = 'fixed !important';  
+                                     	   CRUDBack.style.position = 'fixed !important';  
+                                                                 	   CRUDok.style.position = 'fixed !important';  
+                               }
+     try{ 
+            $('CRUDSearch').style.width = (top.innerWidth - 70) + 'px';
+     }catch(e){}
+      if (top.platform != 'ioshtml5'){
+             addtouchMove();       
+      }
+     resize();
+     //Exibe a primeira Aba    	 
+    try {
+      SetDefaultDateValues()
+      
+    } catch(e) {
+      notifyError(e);
+    }
+    setTimeout(function() {
+      for (var i=0;i<grids.length;i++) {
+        grids[i].refresh();
+      }
+    },200);
+    if (!top.canBack()) {
+	  var i = 1;
+	  var sulfix = '';
+	  while (true) {
+	    if ($('CRUDBack'+sulfix)) {
+     	  $('CRUDBack'+sulfix).style.display = 'none';
+		  i++;
+		  if (i < 10) {
+		    sulfix = '0'+i;
+		  } else {
+		    sulfix = i;
+		  }
+		} else {
+		  break;
+		}
+	  }
+    }  
+    resizeInternal();
+}
+
+function updateLookups(skipComponent) {
+	for (var i=0;i<lookups.length;i++) {
+	  if(skipComponent != lookups[i].id)
+    	lookups[i].refresh();
+    }
+}
+
+var components = [];
+components.push('CRUDHeader1');
+components.push('MakerLabel1');
+components.push('CRUDBack');
+components.push('MakerComboBox1');
+components.push('MakerComboBox2');
+components.push('MakerEdit1');
+components.push('CRUDok');
+components.push('MakerButton1');
+
+
+function ebfFormNextPage(a) {
+	 b =  (a==1) ?  window.innerWidth + "px" : '-' + window.innerWidth + "px"; ; 
+	 var div = document.getElementById("Date");
+	 div.style.left = b ;
+	 // P = VELOCIDADE DE PROGRESSAO
+	 var p = 10;
+	 var f = window.innerWidth/p;
+	 for (x=1;x!=f+1;x++) {
+		// T = TEMPO DE PROGRESSAO
+		 var t = x*2;
+		 setTimeout(function(){
+		    
+		     left = (a==1) ? (parseInt(div.style.left)-p)  : (parseInt(div.style.left)+p);
+			 div.style.left = left + "px";
+			 
+		 },t);	 
+		 
+	 }
+}
+
+</script>
+
+<div id="Date" class="maincontainer">
+<div style="height:100%;width:100%;z-index:1" id="layout"></div>
+  <script>resize();</script>
+  <center style="display: none">
+  <ul id="tabs">
+<li name="Cadastro01" class="selected" onClick="ebfFormOpenTab('Cadastro')" >Cadastro</li>  </ul>
+</center>
+
+<div id="Cadastro01"  style="display: block"   >
+
+
+
+ 
+
+  
+
+<!-- CRUDHeader1 -->
+<style>
+#CRUDHeader1,.CRUDHeader1{  
+
+    height: 46px;
+    left: 0%;
+    top: 0px;
+    width: 100%;
+    position: absolute;
+    z-index: 0;
+}
+</style>
+<header class="bevel" id="CRUDHeader1"></header>
+<!-- /CRUDHeader1 -->
+
+
+ 
+
+  
+
+<!-- MakerLabel1 -->
+<style>
+#MakerLabel1,.MakerLabel1{ 
+     width: 100.0%;
+     height: 5.570291777188329%;
+     font-size: 100%;  
+     top:2.9177718832891246%;
+     left:0.0%;
+     z-index: 4;
+    
+    color:#FFFFFF;
+    text-align:center;
+    font-weight:bold;
+
+    position: absolute;
+    line-height: normal;
+    white-space: nowrap;
+}
+</style>
+<label type="text"  class="label" id="MakerLabel1" name="MakerLabel1"   recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'MakerComboBox1','text')">Selecione a data</label>
+<!-- /MakerLabel1 -->
+
+
+ 
+
+   
+
+<!-- CRUDBack -->
+<style>
+#CRUDBack,.CRUDBack{
+    
+        height: 27px;
+	font-size: 8pt;
+	
+		width: 18%;
+        left:3%;
+	top:11px;
+	    font-family: Arial;
+    z-index: 999999;
+    font-weight:bold;
+
+    text-align:center;
+    position: absolute;
+ }
+</style>
+<button type="button"  class="button " id="CRUDBack"   recordMask="false"  onclick="clickAction(this, function() { CloseCurrentForm() })" ontouchstart="this.className = 'button_active'" ontouchend="this.className = 'button'"> Cancelar </button>
+<!-- /CRUDBack -->
+
+
+ 
+
+  
+
+<!-- MakerComboBox1 -->
+<style>
+#MakerComboBox1,.MakerComboBox1{
+    width: 22.8125%;
+    height: 8.488063660477453%;
+/*    background: #FBFFFF;	 */
+    font-size: 80%; 	
+    color:#000000;
+    
+/*    border: 1px solid #c0c0c0; */
+    top: 23.342175066312997%;
+    left:3.125%;
+    z-index: 1;
+    position: absolute;
+    vertical-align:center;
+}
+#labelMakerComboBox1,.labelMakerComboBox1{
+    top: 21.842175066312997%;
+    height: 8.488063660477453%;
+    left:3.125%;
+    z-index: 1;
+    line-height: 0px;
+    font-size: 100%;
+}
+</style>
+<label id="labelMakerComboBox1" for="MakerComboBox1" class="label labelcomponents"   recordMask="false" ><b> Dia <font color="red">*</font></b></label>
+<select class="combobox" size="1" name="MakerComboBox1" id="MakerComboBox1"   recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'MakerComboBox2','text')">
+  <option value=""></option>
+  <option value="01">01</option>
+  <option value="02">02</option>
+  <option value="03">03</option>
+  <option value="04">04</option>
+  <option value="05">05</option>
+  <option value="06">06</option>
+  <option value="07">07</option>
+  <option value="08">08</option>
+  <option value="09">09</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
+  <option value="21">21</option>
+  <option value="22">22</option>
+  <option value="23">23</option>
+  <option value="24">24</option>
+  <option value="25">25</option>
+  <option value="26">26</option>
+  <option value="27">27</option>
+  <option value="28">28</option>
+  <option value="29">29</option>
+  <option value="30">30</option>
+  <option value="31">31</option>
+</select>
+<!-- /MakerComboBox1 -->
+
+
+ 
+
+  
+
+<!-- MakerComboBox2 -->
+<style>
+#MakerComboBox2,.MakerComboBox2{
+    width: 42.8125%;
+    height: 8.488063660477453%;
+/*    background: #FBFFFF;	 */
+    font-size: 80%; 	
+    color:#000000;
+    
+/*    border: 1px solid #c0c0c0; */
+    top: 23.342175066312997%;
+    left:27.8125%;
+    z-index: 2;
+    position: absolute;
+    vertical-align:center;
+}
+#labelMakerComboBox2,.labelMakerComboBox2{
+    top: 21.842175066312997%;
+    height: 8.488063660477453%;
+    left:27.8125%;
+    z-index: 2;
+    line-height: 0px;
+    font-size: 100%;
+}
+</style>
+<label id="labelMakerComboBox2" for="MakerComboBox2" class="label labelcomponents"   recordMask="false" ><b> Mês <font color="red">*</font></b></label>
+<select class="combobox" size="1" name="MakerComboBox2" id="MakerComboBox2"   recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'MakerEdit1','text')">
+  <option value=""></option>
+  <option value="01">Janeiro</option>
+  <option value="02">Fevereiro</option>
+  <option value="03">Março</option>
+  <option value="04">Abril</option>
+  <option value="05">Maio</option>
+  <option value="06">Junho</option>
+  <option value="07">Julho</option>
+  <option value="08">Agosto</option>
+  <option value="09">Setembro</option>
+  <option value="10">Outubro</option>
+  <option value="11">Novembro</option>
+  <option value="12">Dezembro</option>
+</select>
+<!-- /MakerComboBox2 -->
+
+
+  
+
+  
+
+<!-- MakerEdit1 -->
+<style>
+#MakerEdit1,.MakerEdit1{
+    width: 22.8125%;
+    height: 8.222811671087534%;
+    font-size: 80%; 	
+    color:#000000;
+    background-color:#FBFFFF;
+    
+    z-index: 3;
+    position: absolute;
+    top:23.342175066312997%;
+    left:73.4375%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #c0c0c0;
+}
+
+#labelMakerEdit1,.labelMakerEdit1{
+    top: 22.342175066312997%;
+    left:73.4375%;
+    z-index: 3;
+    line-height: 0px;
+    font-size: 100%;
+}
+
+#imgMakerEdit1{
+    z-index: 3;
+    top:23.342175066312997%;
+    position: absolute;
+    left: 99.25%;
+    height: 19px;
+    width: 19px;
+}
+</style>
+
+   <label id="labelMakerEdit1"  for="MakerEdit1" class="label labelcomponents"><b> Ano <font color="red">*</font></b></label>
+
+
+<input type="text" id="MakerEdit1"    maxlength="4"webmask="" recordMask="false"    onchange="changeAction(this, function() {  })" onkeypress="tabToNextComponent(event,'MakerComboBox1','text')"  />
+
+
+<script>
+   ebfComponentSetMask('',$c('MakerEdit1'),'','')
+    $c('MakerEdit1').type = "tel"
+</script>
+<!-- /MakerEdit1 -->
+
+
+ 
+
+   
+
+<!-- CRUDok -->
+<style>
+#CRUDok,.CRUDok{
+    
+        height: 27px;
+	font-size: 8pt;
+	
+		top:11px;
+	width: 14.958448753462603%; 
+	left: 82.54847645429363%;
+	    font-family: Arial;
+    z-index: 999999;
+    font-weight:bold;
+
+    text-align:center;
+    position: absolute;
+ }
+</style>
+<button type="button"  class="button " id="CRUDok"   recordMask="false"  onclick="clickAction(this, function() { ChangeComponentValueWithSelectedDate() })" ontouchstart="this.className = 'button_active'" ontouchend="this.className = 'button'"> OK</button>
+<!-- /CRUDok -->
+
+
+ 
+
+   
+
+<!-- MakerButton1 -->
+<style>
+#MakerButton1,.MakerButton1{
+	width: 42.8125%;
+    height: 5.305039787798409%;
+        font-size: 80%; 	
+    
+    top:38.726790450928384%;
+    left:27.500000000000004%;
+	
+    z-index: 999999;
+    
+    text-align:center;
+    position: absolute;
+ }
+</style>
+<button type="button"  class="button " id="MakerButton1"   recordMask="false"  onclick="clickAction(this, function() { CleanComponentValueDate() })" ontouchstart="this.className = 'button_active'" ontouchend="this.className = 'button'"> Limpar</button>
+<!-- /MakerButton1 -->
+</div>
+</div>
+</body>
+</html>
